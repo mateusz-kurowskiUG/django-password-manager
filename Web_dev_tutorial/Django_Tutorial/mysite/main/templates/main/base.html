@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}Base{% endblock title %}</title>
+</head>
+<body>
+    <h1>{% block h1 %}Base{% endblock h1 %}</h1>
+    <header>
+        <div class="header_left">
+            <span class="whole_logo">Quiz<span class="logo">Podjebany</span></span>
+        </div>
+        <div class="header_right">
+            <button id="login" class="header_buttons">Login</button>
+            <button id="register" class="header_buttons">Register</button>
+        </div>
+    </header>
+    {% block content %}{% endblock content %}
+    <footer>
+        <span class="direct">Created by: </span><span class="credits">Mateusz Kurowski</span>
+    </footer>
+</body>
+</html>
