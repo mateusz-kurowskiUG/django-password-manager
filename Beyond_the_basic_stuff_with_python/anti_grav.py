@@ -35,7 +35,7 @@ def myMinFunction(*args):
         raise ValueError('myMinFunction() args is an empty sequence')
         for i, value in enumerate(values):
             if i == 0 or value < smallestValue:
-            smallestValue = value
+                smallestValue = value
     return smallestValue
 
 
