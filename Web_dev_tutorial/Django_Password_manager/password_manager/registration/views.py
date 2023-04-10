@@ -9,7 +9,7 @@ def register(response):
         form = forms.RegisterForm(response.POST)
         if form.is_valid():
             form.save()
-            
+                
         return redirect("/")
     else:
         form = forms.RegisterForm()

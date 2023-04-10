@@ -3,6 +3,18 @@
   padding: 0;
 }
 
+.form-text {
+  color: white;
+}
+
+body {
+  color: white;
+  background-color: #161c26;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body a:link {
+  text-decoration: none;
+}
 body a:hover {
   text-decoration: underline;
 }
@@ -10,44 +22,112 @@ body header {
   background-color: navy;
   color: white;
   display: flex;
+  padding: 0.5em 0 0.5em 0;
+  justify-content: space-between;
+  align-items: center;
 }
-@media (min-width: 500px) {
-  body header {
-    justify-content: space-between;
-  }
-  body header .left {
-    display: flex;
-    gap: 2em;
-  }
-  body header .left .item-box {
-    display: flex;
-    gap: 2em;
-  }
-  body header .right {
-    display: flex;
-  }
-  body header .right .btn {
-    color: white;
-  }
-  body header .right .btn:hover {
-    color: aqua;
-  }
+body header .left {
+  display: flex;
+  gap: 2em;
 }
-@media (max-width: 499px) {
-  body header {
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-  }
-  body header .right {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  body header .right .btn {
-    color: white;
-  }
-  body header .right .btn:hover {
-    color: aqua;
-  }
+body header .left .item-box {
+  display: flex;
+  gap: 2em;
+}
+body header .right {
+  display: flex;
+}
+body header .right .btn {
+  color: white;
+}
+body header .right .btn:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+main {
+  color: white;
+}
+main h1 {
+  text-align: center;
+  padding-top: 1em;
+}
+main .content {
+  padding: 1em;
+}
+main .content #password_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: space-evenly;
+}
+main .content #password_container .item {
+  width: 14em;
+  display: flex;
+  flex-direction: column;
+}
+main .content #password_container .item .item-color {
+  text-align: center;
+  color: white;
+  font-size: 1.5em;
+  padding: 1em;
+  background-color: #17819f;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
+main .content #password_container .item .data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+main .content #password_container .item .data .item-login {
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  background-color: #626d75;
+  color: #bac0ce;
+}
+main .content #password_container .item .data .item-buttons {
+  display: flex;
+  flex-direction: column;
+}
+main .content #password_container .item .data .item-buttons button {
+  padding: 0.5em 0 0.5em 0;
+  width: 100%;
+  color: white;
+  background-color: #2f343d;
+}
+main .content #password_container .item .data .item-buttons button.lower_btn {
+  border-top: none;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+main .content #password_container .item .data .item-buttons button:focus {
+  background-color: #191b20;
+}
+main .content #password_container .item .data .item-buttons button:hover {
+  background-color: #24282f;
+}
+main #messages {
+  border: 1px green solid;
+  background-color: lightgreen;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+}
+main .toggle-password {
+  text-align: right;
+}
+
+footer {
+  padding: 1em;
+}
+footer #footnote {
+  text-align: end;
+}
+footer #adnote {
+  font-weight: bold;
+  font-style: italic;
+  margin-left: 0.5em;
 }/*# sourceMappingURL=style.css.map */

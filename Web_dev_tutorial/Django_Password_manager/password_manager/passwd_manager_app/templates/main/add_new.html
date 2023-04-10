@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block h1 %}
+Add new password
+{% endblock h1 %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="POST" class="form-group">
+{% csrf_token %}
+{{form | crispy}}
+<div class="toggle-password">
+<input type="checkbox" class="btn-check" id="btn-check" onChange="check()" autocomplete="off">
+<label class="btn btn-primary" id="label-check" for="btn-check">Show password</label>
+</div>
+<button type="submit" name="save" class="btn btn-success">Save</button>
+</form>
+{% endblock content %}
