@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  a:hover{
+    text-decoration: underline;
+  }
+    header{
+        background-color: navy;
+        color: white;
+      display: flex;
+    }
+  @media (min-width: 500px) {
+    header {
+      justify-content: space-between;
+      .left {
+        display: flex;
+        gap: 2em;
+        .item-box{
+            display: flex;
+            gap: 2em;
+        }
+      }
+      .right {
+        display: flex;
+        .btn{
+          color: white;
+          &:hover{
+            color: aqua;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 499px) {
+    header{
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        .right{
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+          .btn{
+            color: white;
+            &:hover{
+              color: aqua;
+            }
+          }
+
+        }
+    }
+  }
+}
