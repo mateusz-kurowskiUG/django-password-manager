@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+    Your password
+{% endblock title %}
+    
+
+{% block content %}
+<div id="password_container" >
+<div class="item one_pass_view" >
+    <div class="item-color"><div class="txt">{{passwd.acc_name}}</div></div>
+    <div class="data">
+        <div class="item-login">{{passwd.login}}</div>
+        <div class="item-buttons">
+            <button class="cp_login" id="btn-login{{passwd.id}}" onClick="copy('btn-login{{passwd.id}}','{{passwd.login}}','login')">Copy Login</button>
+            <button class="middle_button" id="btn-passwd{{passwd.id}}" onClick="copy('btn-passwd{{passwd.id}}','{{passwd.password}}','password')">Copy Pasword</button>
+            <button class="lower_btn" id="btn-passwd{{passwd.id}}_2" onClick="reveal('btn-passwd{{passwd.id}}_2','{{passwd.password}}')">Reveal Password</button>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

@@ -33,3 +33,13 @@ def add_new(response):
         else:
             form = NewPasswordForm()
         return render(response,"main/add_new.html",{"form":form})
+    
+def password(response,id):
+    passwd = Accounts.objects.get(id=id)
+    if response.user == passwd.user:
+        return render(response,'main/pass.html',{"passwd":passwd})
+    else:
+        return HttpResponseForbidden()
+
+def signed_out(response):
+    return render(response,'registration/logout.html',{})
