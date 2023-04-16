@@ -7,13 +7,18 @@ Add new password
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="POST" class="form-group">
-{% csrf_token %}
-{{form | crispy}}
-<div class="toggle-password">
-<input type="checkbox" class="btn-check" id="btn-check" onChange="check()" autocomplete="off">
-<label class="btn btn-primary" id="label-check" for="btn-check">Show password</label>
+<div class="container-flud" data-bs-theme="dark">
+<form method="POST" class="form-group text-white">
+    {% csrf_token %}
+    {{form | crispy}}
+    <div class="d-flex justify-content-end">
+    <div class="toggle-password m-1">
+        <input type="checkbox" class="btn-check" id="btn-check" onChange="check()" autocomplete="off">
+        <label class="btn btn-primary" id="label-check" for="btn-check">Show password</label>
+        </div>
+        <button type="submit" name="save" class="btn btn-success m-1">Save</button>
 </div>
-<button type="submit" name="save" class="btn btn-success">Save</button>
+
 </form>
+</div>
 {% endblock content %}

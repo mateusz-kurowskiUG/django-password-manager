@@ -25,3 +25,7 @@ const reveal = async (id,text) => {
   document.getElementById(id).innerHTML = "Reveal Password"
 
 }
+
+
+
+
