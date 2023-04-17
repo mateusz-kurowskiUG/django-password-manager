@@ -14,6 +14,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_ROOT=''
+MEDIA_URL=''
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,7 +43,6 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "registration.apps.RegistrationConfig",
-    
 ]
 
 MIDDLEWARE = [
@@ -119,9 +120,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static",]
+
 
 
 # Default primary key field type
@@ -132,3 +133,14 @@ CRISPY_TEMPLATE_PACK="bootstrap5"
 
 LOGIN_REDIRECT_URL="/passwords"
 LOGOUT_REDIRECT_URL="/signed_out"
+
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
+
+MESSAGE_TAGS = {
+    messages.DEBUG: "primary",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",    
+    }

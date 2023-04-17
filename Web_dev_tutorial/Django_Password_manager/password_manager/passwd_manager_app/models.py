@@ -10,3 +10,7 @@ class Accounts(models.Model):
     
     def __str__(self):
         return f"{self.user},{self.acc_name},{self.login},{self.password}"
+    
+class User_avatar(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to="passwd_manager_app/files/avatars",default="passwd_manager_app/files/avatars/mariusz_z_mieczem.jpg")

@@ -10,7 +10,7 @@ My account
 
 {% block content %}
 <div class="container-fluid d-flex flex-column justify-content-center">
-    <img class="img-thumbnail" src="{% static 'img/mariusz_z_mieczem.jpg' %}" alt="najwiekszy polak w polsce">
+    <img class="img-thumbnail" src="{{image}}" alt="najwiekszy polak w polsce">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -19,7 +19,13 @@ My account
             </button>
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+            <div class="accordion-body">
+              <form enctype="multipart/form-data"  method="POST">
+                  {% csrf_token %}
+                  {{edit_form | crispy}}
+                  <button class="btn btn-primary" type="submit">Update</button>
+              </form>
+            </div>
           </div>
         </div>
         <div class="accordion-item">

@@ -1,5 +1,6 @@
 from django.urls import path
-
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 
 urlpatterns = [
@@ -11,4 +12,3 @@ urlpatterns = [
     path("signed_out/", views.signed_out, name="Signed_out"),
     path("@<str:username>", views.my_account, name="My account"),
     ]
-

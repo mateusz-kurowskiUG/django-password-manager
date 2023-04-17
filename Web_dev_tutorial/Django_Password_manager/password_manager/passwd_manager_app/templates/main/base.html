@@ -64,12 +64,13 @@
         {% endblock h1 %}
       </h1>
       {% if messages %}
-      <div class="alert alert-success mt-3 text-center" role="alert">
+      {}
       {% for message in messages %}
-      <p>{{message}}</p>
+      <div class="alert alert-{{message.tags}} mt-3 text-center" role="alert">
+        <p>{{message}}</p>
+      </div>
 
       {% endfor %}
-    </div>
     {% endif %}
     {% block content %}
     CONTENT

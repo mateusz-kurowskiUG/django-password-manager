@@ -6,7 +6,7 @@
 {% endblock title %}
 
 {% block content %}
-<form method="POST" class="form-group reg_form text-white fs-2">
+<form enctype="multipart/form-data" method="POST" class="form-group reg_form text-white fs-2 pb-5">
 {% csrf_token %}
 
     {{form | crispy}}

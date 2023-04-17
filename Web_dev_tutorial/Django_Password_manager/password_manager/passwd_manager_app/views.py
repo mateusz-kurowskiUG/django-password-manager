@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect, HttpResponseForbidden
-from .forms import NewPasswordForm, EditItem,DeleteItem
-from .models import Accounts, User
+from .forms import NewPasswordForm, EditItem,DeleteItem,AvatarForm
+from .models import Accounts, User,User_avatar
 from django.contrib import messages
 from registration.forms import DeleteAcc,EditPassword
+from django.contrib.auth.hashers import make_password
+
+
 
 def home(response):
     return render(response,'main/home.html',{})
@@ -11,7 +14,7 @@ def home(response):
 def passwords(response):
     if response.user.is_authenticated:
         ls = Accounts.objects.filter(user=response.user)
-        return render(response,'main/passwords.html',{"ls":ls})
+        return render(response,'main/passwords.html',{"ls":ls,"len":len(ls)})
     else:
         return redirect("/login")
     
@@ -29,7 +32,7 @@ def add_new(response):
                 new = Accounts(acc_name=acc_name,login=login,password=password)
                 new.save()
                 response.user.accounts.add(new)
-                messages.info(response,"Your password has been added")
+                messages.success(response,"Your password has been added")
                 form = NewPasswordForm()
                 
         else:
@@ -54,7 +57,7 @@ def my_password(response,id):
                     acc_from_db.login = Edit.cleaned_data["login"]
                     acc_from_db.password = Edit.cleaned_data["password"]
                     acc_from_db.save()
-                    messages.info(response,"Your password has been UPDATED")
+                    messages.success(response,"Your password has been UPDATED")
                     Edit = EditItem()
                     Delete = DeleteItem()
             elif 'delete' in response.POST:
@@ -62,7 +65,7 @@ def my_password(response,id):
                 if Delete.is_valid():
                         if Delete.cleaned_data["sure"] == True:
                             acc_from_db.delete()
-                            messages.info(response,"Your password has been DELETED")
+                            messages.success(response,"Your password has been DELETED")
                             return HttpResponseRedirect("/home")
                                 
         Edit = EditItem()
@@ -75,7 +78,7 @@ def signed_out(response):
 
 def my_account(response,username):
     if username != response.user.username:
-            return HttpResponseForbidden()
+            return render(response,"main/question_mark.html",{})
     else:
         if response.method=="POST":
             if "delete_acc" in response.POST:
@@ -83,25 +86,37 @@ def my_account(response,username):
                 if deletion_form.is_valid():
                     user = User.objects.get(username=username)
                     user.delete()
-                    messages.info(response,"Your account has been deleted")
+                    messages.success(response,"Your account has been deleted")
                     return HttpResponseRedirect("/home")
             elif "edit_password" in response.POST:
                 edit_form = EditPassword(response.POST)
                 if edit_form.is_valid():
                     old_passwd = edit_form.cleaned_data["old_password"]
                     new_passwd = edit_form.cleaned_data["new_password"]
-                    if old_passwd == response.user.password:
-                        user = User.objects.get(username=response.user.username)
-                        user.password = new_passwd
+                    if response.user.check_password(old_passwd):
+                        user = User.objects.get(id=response.user.id)
+                        user.password = make_password(new_passwd)
                         user.save()
-                        messages.info(response,"Your password has been successfully changed")
+                        messages.success(response,"Your password has been successfully changed")
 
                     else:
-                        messages.info(response,"Incorrect old password")
-
+                        messages.error(response,"Incorrect old password")
+            elif "avatar_button" in response.POST:
+                avatar_form = AvatarForm(response.POST)
+                if avatar_form.is_valid():
+                    new_avatar = avatar_form.cleaned_data["avatar"]
+                    user_avatar = User_avatar.objects.get(id=response.user.id)
+                    user_avatar.avatar = new_avatar
+                    user_avatar.save()
+                    messages.success(response,"Your avatar has been updated.")
+                else:
+                    messages.error(response,"Error.")
+                    
         
+        avatar_form = AvatarForm()
         edit_form = EditPassword()
         deletion_form = DeleteAcc()
-        return render(response,"main/my_acc.html",{"deletion_form":deletion_form,"edit_form":edit_form})
+        image = User_avatar.objects.get(id=response.user.id)
+        return render(response,"main/my_acc.html",{"image":image.avatar,"deletion_form":deletion_form,"edit_form":edit_form,"avatar_form":avatar_form})
         
     
