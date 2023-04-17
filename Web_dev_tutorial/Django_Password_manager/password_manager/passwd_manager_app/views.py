@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect, HttpResponseForbidden
 from .forms import NewPasswordForm, EditItem,DeleteItem
-from .models import Accounts
+from .models import Accounts, User
 from django.contrib import messages
+from registration.forms import DeleteAcc,EditPassword
 
 def home(response):
     return render(response,'main/home.html',{})
@@ -76,4 +77,31 @@ def my_account(response,username):
     if username != response.user.username:
             return HttpResponseForbidden()
     else:
-        return render(response,"main/my_acc.html",{})
+        if response.method=="POST":
+            if "delete_acc" in response.POST:
+                deletion_form = DeleteAcc(response.POST)
+                if deletion_form.is_valid():
+                    user = User.objects.get(username=username)
+                    user.delete()
+                    messages.info(response,"Your account has been deleted")
+                    return HttpResponseRedirect("/home")
+            elif "edit_password" in response.POST:
+                edit_form = EditPassword(response.POST)
+                if edit_form.is_valid():
+                    old_passwd = edit_form.cleaned_data["old_password"]
+                    new_passwd = edit_form.cleaned_data["new_password"]
+                    if old_passwd == response.user.password:
+                        user = User.objects.get(username=response.user.username)
+                        user.password = new_passwd
+                        user.save()
+                        messages.info(response,"Your password has been successfully changed")
+
+                    else:
+                        messages.info(response,"Incorrect old password")
+
+        
+        edit_form = EditPassword()
+        deletion_form = DeleteAcc()
+        return render(response,"main/my_acc.html",{"deletion_form":deletion_form,"edit_form":edit_form})
+        
+    

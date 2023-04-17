@@ -9,6 +9,3 @@ funk(**slownik)
 
 def int_to_string(num: int) -> str:
     return str(num)
-
-
-git
