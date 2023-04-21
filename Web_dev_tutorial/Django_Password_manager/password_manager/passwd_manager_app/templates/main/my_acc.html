@@ -9,8 +9,8 @@ My account
 {% endblock title %}
 
 {% block content %}
-<div class="container d-flex flex-column justify-content-center">
-    <img class="img-thumbnail" src="/{{image}}" alt="najwiekszy polak w polsce">
+<div class="container-sm d-flex flex-column justify-content-center" style="max-width: 750px;">
+    <img class="img-thumbnail" style="max-height: 500px;" src="/{{image}}" alt="avatar.jpg">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -23,7 +23,7 @@ My account
               <form enctype="multipart/form-data"  method="POST">
                   {% csrf_token %}
                   {{avatar_form | crispy}}
-                  <button class="btn btn-primary" name="avatar_button" type="submit">Update</button>
+                  <button class="btn btn-info" name="avatar_button" type="submit">Update</button>
               </form>
             </div>
           </div>
@@ -47,7 +47,7 @@ My account
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-danger text-black fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-              Usuń konto
+              Delete account
             </button>
           </h2>
           <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">

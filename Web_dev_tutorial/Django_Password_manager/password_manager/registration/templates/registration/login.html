@@ -9,6 +9,7 @@ Login
 {% endblock h1 %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="container-md">
 {% if not user.is_authenticated %}
 <form method="POST" class="form-group text-white fs-2">
     {% csrf_token %}
@@ -19,5 +20,5 @@ Login
 {% else %}
 <p>ur logged in already</p>
 {% endif %}
-
+</div>
 {% endblock content %}

@@ -7,16 +7,26 @@ Add new password
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container-flud" data-bs-theme="dark">
+<div class="container-md" data-bs-theme="dark">
 <form method="POST" class="form-group text-white">
     {% csrf_token %}
     {{form | crispy}}
-    <div class="d-flex justify-content-end">
-    <div class="toggle-password m-1">
+    <div class="d-flex justify-content-between">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
+    <div class="btn-right">
         <input type="checkbox" class="btn-check" id="btn-check" onChange="check()" autocomplete="off">
         <label class="btn btn-primary" id="label-check" for="btn-check">Show password</label>
-        </div>
         <button type="submit" name="save" class="btn btn-success m-1">Save</button>
+        </div>
 </div>
 
 </form>
