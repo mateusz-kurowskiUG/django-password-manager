@@ -16,7 +16,7 @@ def passwords(response):
         ls = Accounts.objects.filter(user=response.user)
         return render(response,'main/passwords.html',{"ls":ls,"len":len(ls)})
     else:
-        return redirect("/login")
+        return redirect("/login/")
     
     
 def add_new(response):
@@ -66,7 +66,7 @@ def my_password(response,id):
                         if Delete.cleaned_data["sure"] == True:
                             acc_from_db.delete()
                             messages.success(response,"Your password has been DELETED")
-                            return HttpResponseRedirect("/home")
+                            return HttpResponseRedirect("/home/")
                                 
         Edit = EditItem()
         Delete = DeleteItem()
@@ -87,7 +87,7 @@ def my_account(response,username):
                     user = User.objects.get(username=username)
                     user.delete()
                     messages.success(response,"Your account has been deleted")
-                    return HttpResponseRedirect("/home")
+                    return HttpResponseRedirect("/home/")
             elif "edit_password" in response.POST:
                 edit_form = EditPassword(response.POST)
                 if edit_form.is_valid():
@@ -102,10 +102,11 @@ def my_account(response,username):
                     else:
                         messages.error(response,"Incorrect old password")
             elif "avatar_button" in response.POST:
-                avatar_form = AvatarForm(response.POST)
+                avatar_form = AvatarForm(response.POST,response.FILES)
                 if avatar_form.is_valid():
                     new_avatar = avatar_form.cleaned_data["avatar"]
-                    user_avatar = User_avatar.objects.get(id=response.user.id)
+                    user_avatar = User_avatar.objects.get(user=response.user)
+                    # USUWANIE STAREGO AVATARU ? IMPORT OS?
                     user_avatar.avatar = new_avatar
                     user_avatar.save()
                     messages.success(response,"Your avatar has been updated.")
@@ -116,7 +117,10 @@ def my_account(response,username):
         avatar_form = AvatarForm()
         edit_form = EditPassword()
         deletion_form = DeleteAcc()
-        image = User_avatar.objects.get(id=response.user.id)
+        image = User_avatar.objects.get(user=response.user)
         return render(response,"main/my_acc.html",{"image":image.avatar,"deletion_form":deletion_form,"edit_form":edit_form,"avatar_form":avatar_form})
+    
+def contact(response):
+    return render(response,"main/contact.html",{})
         
     

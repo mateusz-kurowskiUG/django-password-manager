@@ -9,8 +9,8 @@ My account
 {% endblock title %}
 
 {% block content %}
-<div class="container-fluid d-flex flex-column justify-content-center">
-    <img class="img-thumbnail" src="{{image}}" alt="najwiekszy polak w polsce">
+<div class="container d-flex flex-column justify-content-center">
+    <img class="img-thumbnail" src="/{{image}}" alt="najwiekszy polak w polsce">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -22,8 +22,8 @@ My account
             <div class="accordion-body">
               <form enctype="multipart/form-data"  method="POST">
                   {% csrf_token %}
-                  {{edit_form | crispy}}
-                  <button class="btn btn-primary" type="submit">Update</button>
+                  {{avatar_form | crispy}}
+                  <button class="btn btn-primary" name="avatar_button" type="submit">Update</button>
               </form>
             </div>
           </div>

@@ -14,4 +14,4 @@ class DeleteItem(forms.Form):
     sure = forms.BooleanField(required=True,label="U sure?")
 
 class AvatarForm(forms.Form):
-    avatar = forms.ImageField(label="Avatar (Optional)")
+    avatar = forms.ImageField(label="Avatar")

@@ -131,8 +131,8 @@ STATICFILES_DIRS = [BASE_DIR / "static",]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK="bootstrap5"
 
-LOGIN_REDIRECT_URL="/passwords"
-LOGOUT_REDIRECT_URL="/signed_out"
+LOGIN_REDIRECT_URL="/passwords/"
+LOGOUT_REDIRECT_URL="/signed_out/"
 
 from django.contrib import messages
 from django.contrib.messages import constants as message_constants

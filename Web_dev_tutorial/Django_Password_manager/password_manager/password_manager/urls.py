@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from registration import views as register_views
+from django.contrib.auth.views import LoginView,LogoutView
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -27,6 +28,9 @@ urlpatterns = [
     path('', include("passwd_manager_app.urls")),
     path('', include("django.contrib.auth.urls")),
     path('register/',register_views.register,name="Register" ),
+    path('login/',LoginView.as_view(),name="Login" ),
+    path('logout/',LogoutView.as_view(),name="Logout" ),
+    path('signed_out/',LogoutView.as_view(),name="Logout" ),    
 ]
 
 urlpatterns+= static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
