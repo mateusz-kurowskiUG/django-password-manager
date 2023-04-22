@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Accounts(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,related_name="accounts")
     acc_name = models.CharField(max_length=30)
+    url = models.URLField(max_length=100)
     login = models.CharField(max_length=40)
     password = models.CharField(max_length=30)
     

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+ENCRYPT_KEY = b'BlX-6zJ3VkjXI429MaxvqPfz6-i_n4_orLlgbX8zVp0='
 
 from pathlib import Path
 
@@ -144,3 +145,4 @@ MESSAGE_TAGS = {
     messages.WARNING: "warning",
     messages.ERROR: "danger",    
     }
+

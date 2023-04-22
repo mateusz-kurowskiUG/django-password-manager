@@ -5,7 +5,8 @@ from .models import Accounts, User,User_avatar
 from django.contrib import messages
 from registration.forms import DeleteAcc,EditPassword
 from django.contrib.auth.hashers import make_password
-
+from django.conf import settings
+from .ecryption_utils import *
 
 
 def home(response):
@@ -27,9 +28,10 @@ def add_new(response):
             form = NewPasswordForm(response.POST)
             if form.is_valid():
                 acc_name = form.cleaned_data["acc_name"]
+                url = form.cleaned_data["url"]
                 login = form.cleaned_data["login"]
-                password = form.cleaned_data["password"]
-                new = Accounts(acc_name=acc_name,login=login,password=password)
+                password = encrypt(form.cleaned_data["password"])
+                new = Accounts(acc_name=acc_name,url=url,login=login,password=password)
                 new.save()
                 response.user.accounts.add(new)
                 messages.success(response,"Your password has been added")
@@ -55,7 +57,7 @@ def my_password(response,id):
                 if Edit.is_valid():
                     acc_from_db.acc_name = Edit.cleaned_data["acc_name"]
                     acc_from_db.login = Edit.cleaned_data["login"]
-                    acc_from_db.password = Edit.cleaned_data["password"]
+                    acc_from_db.password = encrypt(Edit.cleaned_data['password'])
                     acc_from_db.save()
                     messages.success(response,"Your password has been UPDATED")
                     Edit = EditItem()
@@ -70,6 +72,7 @@ def my_password(response,id):
                                 
         Edit = EditItem()
         Delete = DeleteItem()
+        acc_from_db.password = decrypt(acc_from_db.password)
         return render(response,'main/pass.html',{"acc_from_db":acc_from_db,"edit_form":Edit,"delete_form":Delete})
             
 
@@ -106,7 +109,7 @@ def my_account(response,username):
                 if avatar_form.is_valid():
                     new_avatar = avatar_form.cleaned_data["avatar"]
                     user_avatar = User_avatar.objects.get(user=response.user)
-                    # USUWANIE STAREGO AVATARU ? IMPORT OS?
+                    # USUWANIE STAREGO AVATARU ? IMPORT OS? kiedys zrobie
                     user_avatar.avatar = new_avatar
                     user_avatar.save()
                     messages.success(response,"Your avatar has been updated.")
