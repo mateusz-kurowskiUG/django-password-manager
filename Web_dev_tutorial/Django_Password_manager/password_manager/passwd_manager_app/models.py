@@ -15,3 +15,7 @@ class Accounts(models.Model):
 class User_avatar(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to="passwd_manager_app/files/avatars",default="passwd_manager_app/files/avatars/mariusz_z_mieczem.jpg")
+
+class Messages(models.Model):
+    user= models.ForeignKey(User,on_delete=models.CASCADE,null=True,related_name="messages")
+    message = models.CharField(max_length=255)

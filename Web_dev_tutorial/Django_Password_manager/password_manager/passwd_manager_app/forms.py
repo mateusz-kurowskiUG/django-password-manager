@@ -16,3 +16,7 @@ class DeleteItem(forms.Form):
 
 class AvatarForm(forms.Form):
     avatar = forms.ImageField(label="Avatar")
+    
+class MessageForm(forms.Form):
+    message = forms.CharField(widget=forms.Textarea)
+    sure = forms.BooleanField(required=True,label="U sure?")

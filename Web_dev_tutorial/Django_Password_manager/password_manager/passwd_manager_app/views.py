@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect, HttpResponseForbidden
-from .forms import NewPasswordForm, EditItem,DeleteItem,AvatarForm
-from .models import Accounts, User,User_avatar
+from .forms import NewPasswordForm, EditItem,DeleteItem,AvatarForm,MessageForm
+from .models import Accounts, User,User_avatar,Messages
 from django.contrib import messages
 from registration.forms import DeleteAcc,EditPassword
 from django.contrib.auth.hashers import make_password
@@ -124,6 +124,20 @@ def my_account(response,username):
         return render(response,"main/my_acc.html",{"image":image.avatar,"deletion_form":deletion_form,"edit_form":edit_form,"avatar_form":avatar_form})
     
 def contact(response):
-    return render(response,"main/contact.html",{})
+    if not response.user.is_authenticated:
+        return HttpResponseRedirect("/login/")
+    
+    if response.method=="POST":
+        if "send_message" in response.POST: 
+            message_form = MessageForm(response.POST)
+            if message_form.is_valid():
+                message = message_form.cleaned_data["message"]
+                new_message = Messages(message=message)
+                new_message.save()
+                response.user.messages.add(new_message)
+                messages.success(response,"Your message has been sent")
+                
+    message_form = MessageForm()
+    return render(response,"main/contact.html",{"message_form":message_form})
         
     
