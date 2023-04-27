@@ -68,7 +68,7 @@ def my_password(response,id):
                         if Delete.cleaned_data["sure"] == True:
                             acc_from_db.delete()
                             messages.success(response,"Your password has been DELETED")
-                            return HttpResponseRedirect("/home/")
+                            return HttpResponseRedirect("/passwords/")
                                 
         Edit = EditItem()
         Delete = DeleteItem()
