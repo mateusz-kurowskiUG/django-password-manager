@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-1dnzbphrc47#%vzuxwnzv__fa(mym^6@+@d8_s3f_jj7l5rw#m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =  ['*']
 
 
 # Application definition
@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'password_manager.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME":'passwd_manager_db',
+        "NAME":'postgres',
         "USER":"postgres",
-        "PASSWORD":"root",
-        "HOST":"localhost",
+        "PASSWORD":"postgres",
+        "HOST":"db",
         "PORT":"5432"
     }
 }
