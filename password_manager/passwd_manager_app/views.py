@@ -120,7 +120,12 @@ def my_account(response,username):
         avatar_form = AvatarForm()
         edit_form = EditPassword()
         deletion_form = DeleteAcc()
-        image = User_avatar.objects.get(user=response.user)
+        try:
+            image = User_avatar.objects.get(user=response.user)
+        except User_avatar.DoesNotExist:
+            new_image = User_avatar(user=response.user)
+            new_image.save()
+            image = User_avatar.objects.get(user=response.user)
         return render(response,"main/my_acc.html",{"image":image.avatar,"deletion_form":deletion_form,"edit_form":edit_form,"avatar_form":avatar_form})
     
 def contact(response):

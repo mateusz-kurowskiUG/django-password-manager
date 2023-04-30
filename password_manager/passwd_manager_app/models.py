@@ -7,7 +7,7 @@ class Accounts(models.Model):
     acc_name = models.CharField(max_length=30)
     url = models.URLField(max_length=100)
     login = models.CharField(max_length=40)
-    password = models.CharField(max_length=30)
+    password = models.CharField()
     
     def __str__(self):
         return f"{self.user},{self.acc_name},{self.login},{self.password}"
