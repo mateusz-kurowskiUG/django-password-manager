@@ -1,5 +1,5 @@
 # Password Manager
-## First Project /w Django and Docker
+## First Project /w Django, Docker and Postgres
 
 How to run?
 
@@ -10,4 +10,4 @@ How to run?
 Do it twice if it does not work (it does not usually).
 
 To view admin panel, first you need to create superuser.
-Run `python manage.py createsuperuser`
+Enter the `web` container and Run `python manage.py createsuperuser`
