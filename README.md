@@ -1,5 +1,5 @@
 # Password Manager
-## First Project /w Django, Docker and Postgres
+## First (ever) Project /w Django, Docker and Postgres
 
 How to run?
 
@@ -7,7 +7,5 @@ How to run?
 1. `docker-compose build`
 1. `docker-compose up`
 
-Do it twice if it does not work (it does not usually).
-
-To view admin panel, first you need to create superuser.
+To view the admin panel, first you need to create the superuser.
 Enter the `web` container and Run `python manage.py createsuperuser`
